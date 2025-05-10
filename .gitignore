@@ -1,0 +1,51 @@
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.cache
+
+# Dependency files (except requirements.txt)
+pip-selfcheck.json
+Pipfile.lock
+poetry.lock
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Compiled/binary files
+*.so
+*.dll
+*.exe
+*.bin
+*.out
+*.app
+
+# Secrets
+*.env
+*.secret
+config.py
+secrets.json
+credentials.*
