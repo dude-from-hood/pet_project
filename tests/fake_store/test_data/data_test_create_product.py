@@ -4,7 +4,7 @@ test_data = [
     {
         "description": "Базовая проверка по созданию фейк магазина "
                        "ОР: Успешно, код 200",
-        "expected_code": 201,
+        "expected_code": 200,
         "test_data": generate_new_product()
 
     }
