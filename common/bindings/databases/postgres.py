@@ -159,3 +159,20 @@ def crud_query(text_query: str,
         conn.commit()
 
     return rowcount
+
+if __name__ == '__main__':
+    import pprint
+
+    result = select_query(
+        host="hh-pgsql-public.ebi.ac.uk",
+        port="5432",
+        user="reader",
+        password="NWDMCE5xdipIjRrp", # TODO: создать файл по работе с файлом .env
+        database_name='pfmegrnargs',
+        text_query='SELECT * FROM rnc_database LIMIT 5'  # Ограничиваем 5 записями
+    )
+
+    # Выводим первую строку
+    pprint.pp(result.first_row)
+
+    print(f"кол-во записей: {result.rowcount}") # методы из __init__ обращение через точку тк это result - это класс QueryResult
