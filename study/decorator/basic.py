@@ -8,9 +8,15 @@
 
 После уже можно повестить тег на функцию с именем обертки (декоратора) при вызове, порядок исполнения см.ниже:
 
+
+
+Порядок выполнения декораторов снизу вверх: сперва выполняется декоратор, стоящий над определением функции, но
+исполнение может быть сверху вниз! - см задачу first_validator, аналогия с матрешкой.
+
+Выполнение по принципу LIFO (Last In, First Out) — последний добавленный декоратор выполняется первым.
 @decorator3
 @decorator2
-@decorator1 - самая близкая к функции, и можно по неск.раз вещать один и тот же декоратор (два раза decorator1)
+@decorator1
 def my_function():
     pass
 """
@@ -33,7 +39,8 @@ def repeater(func):
 
     return wrapper
 
-@repeater # вот такой тег
+
+@repeater  # вот такой тег
 def multiply(num1, num2):
     return num1 * num2
 
@@ -62,11 +69,12 @@ def uppercase_elements(func):
     выход:
     ['MONARCH', 'TOUCH', 'OFFICIAL', 'DANGEROUS', 'BREATHE']
     """
+
     def wrapper(*args, **kwargs):
         res = func(*args, **kwargs)
 
         if isinstance(res, dict):
-            return {k.upper() if isinstance(k, str) else k: v for k, v in res.items()} # после ключа пишем условие
+            return {k.upper() if isinstance(k, str) else k: v for k, v in res.items()}  # после ключа пишем условие
 
         elif isinstance(res, list):
             return [i.upper() if isinstance(i, str) else i for i in res]
@@ -84,27 +92,47 @@ def uppercase_elements(func):
 
     return wrapper
 
-if __name__ == '__main__':
-    def double_it(func):
-        def wrapper(*args, **kwargs):
-            return func(*args, **kwargs) * 2
 
-        return wrapper
+def first_validator(func):
+    def my_wrapper(*args, **kwargs):
+        print(f"Начинаем важную проверку")
+        if len(args) == 3:
+            func(*args, **kwargs)
+        else:
+            print(f"Важная проверка не пройдена")
+            return None
+        print(f"Заканчиваем важную проверку")
 
-
-    def increment(func):
-        def wrapper(*args, **kwargs):
-            return func(*args, **kwargs) + 1
-
-        return wrapper
-
-
-    @double_it
-    @increment
-    @increment
-    def add(num1, num2):
-        return num1 + num2
+    return my_wrapper
 
 
-    print(add(5, 7))
+def second_validator(func):
+    def my_wrapper(*args, **kwargs):
+        print(f"Начинаем самую важную проверку")
+        if kwargs.get('name') == 'Boris':
+            func(*args) # это уже задекорированная first_validator версия sum_values
+        else:
+            print(f"Самая важная проверка не пройдена")
+            return None
+        print(f"Заканчиваем самую важную проверку")
+
+    return my_wrapper
+
+
+# используйте декораторы
+@second_validator
+@first_validator
+def sum_values(*args):
+    print(f'Получили результат равный {sum(args)}')
+
+"""
+Начинаем самую важную проверку
+Начинаем важную проверку
+Получили результат равный 77
+Заканчиваем важную проверку
+Заканчиваем самую важную проверку
+"""
+
+# вызовите функцию sum_values()
+sum_values(1, 6, 70, name='Boris')
 
