@@ -21,6 +21,7 @@ def my_function():
     pass
 """
 
+
 # базовый синтаксис декоратора в python
 def my_decorator(func):
     def wrapper_func():
@@ -110,7 +111,7 @@ def second_validator(func):
     def my_wrapper(*args, **kwargs):
         print(f"Начинаем самую важную проверку")
         if kwargs.get('name') == 'Boris':
-            func(*args) # это уже задекорированная first_validator версия sum_values
+            func(*args)  # это уже задекорированная first_validator версия sum_values
         else:
             print(f"Самая важная проверка не пройдена")
             return None
@@ -125,6 +126,7 @@ def second_validator(func):
 def sum_values(*args):
     print(f'Получили результат равный {sum(args)}')
 
+
 """
 Начинаем самую важную проверку
 Начинаем важную проверку
@@ -134,5 +136,82 @@ def sum_values(*args):
 """
 
 # вызовите функцию sum_values()
-sum_values(1, 6, 70, name='Boris')
+#sum_values(1, 6, 70, name='Boris')
+
+def validate_all_args_str(func):
+    def wrapper(*args, **kwargs):
+        for arg in args:
+            if not isinstance(arg, str):
+                print("Все аргументы должны быть строками")
+                return None
+        return func(*args, **kwargs)
+    return wrapper
+
+
+def validate_all_kwargs_int_pos(func):
+    def wrapper(*args, **kwargs):
+        for value in kwargs.values():
+            if not isinstance(value, int) or value <= 0:
+                print("Все именованные аргументы должны быть положительными числами")
+                return None
+        return func(*args, **kwargs)
+    return wrapper
+
+
+@validate_all_args_str
+@validate_all_kwargs_int_pos
+def concatenate(*args, **kwargs):
+    result = ""
+    for arg in args + tuple(kwargs.values()):
+        result += str(arg)
+    return result
+
+# print(concatenate('Hello', 2, 'World', a="i", b='Love', c="Python"))
+# print(concatenate(a="Я", b="Выучу", c="Этот", d="Питон", e="!"))
+# print(concatenate('fff', 'sss', "ss"))
+# print(concatenate(a=10, b=20, c=50))
+
+
+"""
+Сначала filter_even фильтрует позиционные аргументы
+Затем delete_short фильтрует именованные аргументы
+Наконец, вызывается основная функция concatenate
+"""
+def filter_even(func):
+    def wrapper(*args, **kwargs):  # Фильтруются только args! (позиционные аргументы)
+        filtered_args = []
+        for arg in args:
+            if (isinstance(arg, (int, float)) and arg % 2 == 0) or (arg is False) or (
+                    hasattr(arg, '__len__') and len(arg) % 2 == 0):
+                filtered_args.append(arg)
+        return func(*filtered_args, **kwargs)
+
+    return wrapper
+
+def delete_short(func):
+    def wrapper(*args,**kwargs): # Фильтруются только kwargs! (именованные аргументы)
+        filtered_kwargs = dict()
+        for key, value in kwargs.items():
+            if len(key) > 4:
+                filtered_kwargs[key] = value
+        return func(*args, **filtered_kwargs)
+
+    return wrapper
+
+@filter_even
+@delete_short
+def concatenate(*args, **kwargs):
+    result = ""
+    for arg in args + tuple(kwargs.values()):
+        result += str(arg)
+    return result
+
+
+print(concatenate("Я", "хочу", "Выучить", "Питон", a="За", qwerty=10, c="Месяцев"))
+# Теперь выведет: "хочу10"
+
+
+
+
+
 
