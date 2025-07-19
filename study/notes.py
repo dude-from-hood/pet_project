@@ -38,6 +38,7 @@ if __name__ == '__main__':
     new_s = 'Hello my name is John Doe'
 
     result = dict(Counter(new_s))
+    print(Counter(new_s).most_common(2))
     print(result)
 
     if " " in result:
@@ -54,3 +55,44 @@ if __name__ == '__main__':
 
     # result = sorted(result.items(), key=lambda item: item[1], reverse=True)
 
+    from collections import defaultdict
+    dd = defaultdict(list)
+    dd["fruits"].append("apple")  # Не нужно проверять наличие ключа!
+    print(dd)
+
+    from collections import deque
+
+    """
+    Двусторонняя очередь. Быстрые операции (O(1)) с начала и конца.
+    
+    Методы:
+    appendleft(), popleft() — добавление/удаление слева.
+    rotate(n) — циклический сдвиг на n элементов.
+    """
+
+    d = deque([1, 2, 3])
+    d.appendleft(0)  # deque([0, 1, 2, 3])
+    print(d)
+    d.rotate(2)
+    print(d)
+
+    from collections import namedtuple
+    """
+    Создаёт кортеж с именованными полями. Удобен для чтения кода.
+    """
+    Point = namedtuple("Point", ["x", "y"])
+    print(Point)
+    p = Point(10, y=20)
+    print(p)
+    print(p.x, p.y)  # 10 20
+
+    from collections import ChainMap
+    """
+    Объединяет несколько словарей в один интерфейс. Поиск происходит последовательно в каждом словаре.
+    """
+
+    dict1 = {"a": 1}
+    dict2 = {"b": 2}
+    dict3 = {"c": 3}
+    chain = ChainMap(dict1, dict2, dict3)
+    print(chain["c"])  # 3 (из dict3)

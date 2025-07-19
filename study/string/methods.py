@@ -28,4 +28,4 @@ print(f"+{'-' * 50}")
 # Метод replace используется для замены последовательности символов в строке на другую последовательность
 string1 = 'FastEthernet0/1'
 string1.replace('Fast', 'Gigabit')
-'GigabitEthernet0/1'
+# 'GigabitEthernet0/1'
