@@ -37,5 +37,10 @@ def generate_new_product(
 if __name__ == '__main__':
     import pprint
 
+    print(id(fake))
+    print(fake)
+    print(hex(id(fake)))  # Выведет тот же адрес, что и в repr (например, '0x1073bca10') 
+    # Функция hex() в Python преобразует целое число в шестнадцатеричную (hex) строку с префиксом 0x
+
     x = generate_new_product()
     pprint.pp(x)
