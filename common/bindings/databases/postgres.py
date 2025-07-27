@@ -1,5 +1,10 @@
 import psycopg2
 from psycopg2._psycopg import connection
+import os
+from dotenv import load_dotenv
+
+# Загружаем переменные из .env
+load_dotenv()  # По умолчанию ищет .env в текущей директории
 
 current_connections: list[connection] = []  # активное подключение к БД
 
@@ -164,11 +169,11 @@ if __name__ == '__main__':
     import pprint
 
     result = select_query(
-        host="hh-pgsql-public.ebi.ac.uk",
-        port="5432",
-        user="reader",
-        password="NWDMCE5xdipIjRrp", # TODO: создать файл по работе с файлом .env
-        database_name='pfmegrnargs',
+        host=os.getenv('DB_HOST'),
+        port=os.getenv('DB_PORT'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'), # TODO: создать файл по работе с файлом .env
+        database_name=os.getenv('DB_NAME'),
         text_query='SELECT * FROM rnc_database LIMIT 5'  # Ограничиваем 5 записями
     )
 
