@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
 
     class Solution:
-        def removeElement(self, nums: List[int], val: int) -> int:
+        def removeElement(self, nums: List[int], val: int) -> tuple:
             i = 0
             for j in range(len(nums)):
                 if nums[j] != val:
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             for k in range(i, len(nums)):
                 nums[k] = '_'
 
-            return (i, nums)
+            return i, nums
 
 
     s = Solution()
