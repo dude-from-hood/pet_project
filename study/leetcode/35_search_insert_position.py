@@ -27,8 +27,9 @@ class Solution:
                     return i
 
 
-nums = [1, 3, 5, 6]
-target = 5
+nums = list(range(1, 20, 2))
+print(nums)
+target = 6
 
 s = Solution()
 
