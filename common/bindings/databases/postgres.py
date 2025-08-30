@@ -172,7 +172,7 @@ if __name__ == '__main__':
         host=os.getenv('DB_HOST'),
         port=os.getenv('DB_PORT'),
         user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'), # TODO: создать файл по работе с файлом .env
+        password=os.getenv('DB_PASSWORD'),
         database_name=os.getenv('DB_NAME'),
         text_query='SELECT * FROM rnc_database LIMIT 5'  # Ограничиваем 5 записями
     )
