@@ -19,7 +19,7 @@ class TestCrudFakeStore:
         )
         response_json = response.json()
 
-        assert 200 == response.status_code
+        assert 201 == response.status_code
 
         for key, value in test_product.items():
             if key == 'id':

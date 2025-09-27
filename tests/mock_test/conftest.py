@@ -1,6 +1,6 @@
 import pytest
 import requests
-from auth_utils import generate_fake_token, generate_expired_token
+from study.mock_auth_token.auth_utils import generate_fake_token, generate_expired_token
 
 
 # Фикстуры для заголовков авторизации

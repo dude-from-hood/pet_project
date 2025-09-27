@@ -9,6 +9,22 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 """
 
-def climb_stairs():
-    ...
+def climbStairs(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
 
+    prev2 = 1  # f(1)
+    prev1 = 2  # f(2)
+
+    for i in range(3, n + 1):
+        current = prev1 + prev2
+        prev2 = prev1
+        prev1 = current
+
+    return prev1
+
+# Примеры:
+print(climbStairs(5))  # Output: 8
+print(climbStairs(6))  # Output: 13
