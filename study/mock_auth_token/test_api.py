@@ -1,15 +1,22 @@
 import requests
 
+from common.bindings.utils.create_logger import setup_logger
+
+#+-------------------------------
+logger = setup_logger(__name__)
+#+-------------------------------
 
 class TestCrud:
 
     def test_api_with_valid_auth(self, valid_auth_headers, mock_requests):
-
         """Тест с валидной авторизацией"""
+
+        logger.info("Запрос готов")
         response = requests.get(
             "https://api.example.com/protected",
             headers=valid_auth_headers
         )
+        logger.info("Запрос отправлен")
 
         assert response.status_code == 200
         assert response.json()["data"] == "test"
