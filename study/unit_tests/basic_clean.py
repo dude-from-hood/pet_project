@@ -22,13 +22,28 @@ def check_above_limit():
 #     return is_positive_even(54) is True
 
 
+
+#+------------------------
+def sum_params(a, b):
+    return a + b
+
+def check_sum_func(n, m, total):
+    if not sum_params(n, m) == total:
+        raise AssertionError("Значения total неверно")
+    else:
+        return True
+
 # Запуск проверок
 if __name__ == '__main__':
-    print("Проверка чётного положительного:", check_positive_even())
-    print("Проверка нечётного:", check_positive_odd())
-    print("Проверка граничного значения (1000):", check_max_boundary())
-    print("Заведомо негативная проверка (2001):", check_neg_boundary())
-    print("Проверка превышения лимита (9999):", check_above_limit())
+    print(check_sum_func(3,2, 5))
 
-    print("Проверка функции is_positive_even")
-    # print('Введенное число является: ', is_positive_even(int(input())))
+    #
+    # print("Проверка чётного положительного:", check_positive_even())
+    # print("Проверка нечётного:", check_positive_odd())
+    # print("Проверка граничного значения (1000):", check_max_boundary())
+    # print("Заведомо негативная проверка (2001):", check_neg_boundary())
+    # print("Проверка превышения лимита (9999):", check_above_limit())
+    #
+    # # print("Проверка функции is_positive_even")
+    # number = is_positive_even(int(input()))
+    # print(number)
