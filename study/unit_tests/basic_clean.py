@@ -25,6 +25,8 @@ def check_above_limit():
 
 #+------------------------
 def sum_params(a, b):
+    if None in [a, b]:
+        raise ValueError("Null в переданных a/b")
     return a + b
 
 def check_sum_func(n, m, total):
@@ -35,7 +37,7 @@ def check_sum_func(n, m, total):
 
 # Запуск проверок
 if __name__ == '__main__':
-    print(check_sum_func(3,2, 5))
+    print(check_sum_func(None,2, 5))
 
     #
     # print("Проверка чётного положительного:", check_positive_even())
