@@ -32,7 +32,7 @@ def check_sum_func(n, m, total):
     if None in [n, m, total]:
         raise ValueError("Null передан во входные параметры")
 
-    if not isinstance((n, m, total), int):
+    if not all(isinstance(x, int) for x in (n, m, total)):
         raise TypeError("Тип данных не integer")
 
     if not sum_params(n, m) == total:
@@ -43,7 +43,7 @@ def check_sum_func(n, m, total):
 
 # Запуск проверок
 if __name__ == '__main__':
-    print(check_sum_func("3",2, 5))
+    print(check_sum_func(3, 2, 5))
 
     #
     # print("Проверка чётного положительного:", check_positive_even())
