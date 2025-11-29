@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 # Простая фикстура, возвращающая тестовые данные
@@ -23,6 +25,19 @@ def print_before_and_after():
     print("\nStarting test...")
     yield
     print("\nGood-bye, this is the end")
+
+
+@pytest.fixture
+def temp_file():
+    # SETUP: создаём файл
+    path = "temp_test.txt"
+    with open(path, "w") as f:
+        f.write("test data")
+
+    yield path  # ← тест получит путь к файлу / если заменить на return то не выполнится teardown, код после теста
+
+    # TEARDOWN: удаляем файл ПОСЛЕ теста
+    #os.remove(path)
 
 """
 Фикстура с 

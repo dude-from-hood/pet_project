@@ -1,3 +1,5 @@
+import os
+
 from common.utils.random_utils import add, helper
 import pytest
 def test_add_with_fixture(sample_numbers):
@@ -26,3 +28,10 @@ def test_something():
 )
 def test_helper_parametrized(input_msg, max_len, expected):
     assert helper(input_msg, max_length=max_len) == expected
+
+
+# test_file.py
+def test_read_file(temp_file):  # ← имя аргумента = имя фикстуры
+    # Проверяем, что файл существует и содержит данные
+    with open(temp_file, "r") as f:
+        assert f.read() == "test data"
