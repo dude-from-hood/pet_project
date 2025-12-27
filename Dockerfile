@@ -18,4 +18,4 @@ RUN echo "import os" > config.py && \
     echo "ROOT = os.path.dirname(os.path.abspath(__file__))" >> config.py
 
 # 7. Команда по умолчанию
-CMD ["pytest", "tests/fake_store/test_fake_store.py", "-v", "--tb=short"]
+CMD ["pytest", "tests/fake_store/test_mocks.py", "-v", "-s", "--tb=short"]

@@ -1,6 +1,7 @@
 import allure
 import pytest
-
+from unittest.mock import patch, Mock
+from tests.fake_store.mocks.requests_mock import FakeStoreAPIMocks
 from common.fixtures_and_hooks.fixtures import load_tests
 
 
@@ -69,3 +70,33 @@ def data_test_create_product(request):
     """
     return _generate_test_data_from_config(request.param)
 
+
+@pytest.fixture(autouse=True)
+def mock_external_apis():
+    """
+    Автоматически заглушаем все внешние API запросы в тестах.
+    Это делает тесты стабильными и независимыми от внешних сервисов.
+    """
+    with patch('requests.post') as mock_post, \
+            patch('requests.get') as mock_get, \
+            patch('requests.put') as mock_put, \
+            patch('requests.delete') as mock_delete:
+        # Настраиваем моки для разных URL
+
+        # POST запросы
+        mock_post.return_value = FakeStoreAPIMocks.mock_successful_product_create()
+
+        # GET запросы (продукты)
+        mock_get.side_effect = lambda url, **kwargs: (
+            FakeStoreAPIMocks.mock_get_products()
+            if 'products' in url and not url.endswith('/1')
+            else FakeStoreAPIMocks.mock_get_product()
+        )
+
+        # PUT запросы
+        mock_put.return_value = FakeStoreAPIMocks.mock_update_product()
+
+        # DELETE запросы
+        mock_delete.return_value = FakeStoreAPIMocks.mock_delete_product()
+
+        yield
