@@ -13,5 +13,9 @@ RUN pip install --no-cache-dir -r reqs.txt
 # 5. Копируем весь проект в контейнер
 COPY . .
 
-# 6. Команда по умолчанию
+# 6. СОЗДАЕМ config.py С ПРАВИЛЬНЫМ ПУТЕМ
+RUN echo "import os" > config.py && \
+    echo "ROOT = os.path.dirname(os.path.abspath(__file__))" >> config.py
+
+# 7. Команда по умолчанию
 CMD ["pytest", "tests/fake_store/test_fake_store.py", "-v", "--tb=short"]
