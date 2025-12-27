@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r reqs.txt
 COPY . .
 
 # 6. Команда по умолчанию
-CMD ["pytest", "-v", "--tb=short"]
+CMD ["pytest", "tests/fake_store/test_fake_store.py", "-v", "--tb=short"]

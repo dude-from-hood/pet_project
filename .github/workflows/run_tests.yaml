@@ -1,0 +1,25 @@
+name: Run Tests in Docker
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_target:
+        description: 'Test file or directory (default: tests/)'
+        required: false
+        default: 'tests/'
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t autotests-clean .
+
+      - name: Run tests
+        run: |
+          echo "Running tests from: ${{ github.event.inputs.test_target }}"
+          docker run --rm autotests-clean pytest ${{ github.event.inputs.test_target }} -v --tb=short
