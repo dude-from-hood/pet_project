@@ -18,8 +18,8 @@ def execution_time_deco(func):
 @execution_time_deco
 def my_func():
     """важный docstring"""
-    s = [i for i in range(1000000)]  # пример полезной работы
-    return "Готово!"
+    s = [i for i in range(10000)]  # пример полезной работы
+    return s
 
 print(my_func()) # выводим результат функции
 
