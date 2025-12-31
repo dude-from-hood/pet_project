@@ -21,7 +21,7 @@ def my_func():
     s = [i for i in range(1000000)]  # пример полезной работы
     return "Готово!"
 
-my_func()
+print(my_func()) # выводим результат функции
 
 print(my_func.__name__)
 print(my_func.__doc__)
