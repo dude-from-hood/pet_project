@@ -5,8 +5,8 @@ if __name__ == '__main__':
     # задать часовой пояс
     msk_tz = pytz.timezone('Europe/Moscow')
 
-    # текущее время в Москве - datetime
-    time_msk = datetime.now(tz=msk_tz)
+    # текущее время - 7 мин в Москве = datetime
+    time_msk = datetime.now(tz=msk_tz) - timedelta(minutes=7)
     print(time_msk)
 
     # время в UTC - datetime
