@@ -1,6 +1,7 @@
 if __name__ == '__main__':
     from datetime import datetime, timedelta
     import pytz
+    import os
 
     # задать часовой пояс
     msk_tz = pytz.timezone('Europe/Moscow')
@@ -26,3 +27,11 @@ if __name__ == '__main__':
     print(dt_utc)
     dt_moscow_roundtrip = dt_utc.astimezone(msk_tz)
     print(dt_moscow_roundtrip)
+
+    # абсолютный путь к текущей директории
+    abs_path_dir = os.path.abspath(os.path.dirname(__file__))
+    print(abs_path_dir)
+
+    # абсолютный путь к текущему файлу
+    abs_path_file = os.path.abspath(__file__)
+    print(abs_path_file)
