@@ -1,4 +1,5 @@
 from common.bindings.app.services.user_service import UserService
+from common.bindings.utils.create_logger import log
 
 
 class TestUserClient:
@@ -13,6 +14,7 @@ class TestUserClient:
 
         # Act
         response = client.get("/users/1")
+        log.info(f'response: {response.json()}')
 
         # Assert
         assert response.status_code == 200
