@@ -25,3 +25,5 @@ my_func()
 
 print(my_func.__name__)
 print(my_func.__doc__)
+
+# проверка
