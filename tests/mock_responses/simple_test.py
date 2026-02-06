@@ -26,7 +26,7 @@ def mock_user_api(request):
         else:
             rsps.add("GET", url, json={"error": "User not found"}, status=404)
         # Передаём сценарий в тест, чтобы знать, чего ожидать
-        yield rsps, scenario
+        yield rsps, scenario # yield, тк нам нужен teardown
 
 
 # 3. Тест — получает и мок, и данные сценария
