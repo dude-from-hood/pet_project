@@ -13,7 +13,8 @@ with responses.RequestsMock() as mock_resp:
 
     Все зарегистрированные моки автоматически удаляются после выхода из блока.
     """
-    mock_resp.get("https://api.example.com/user/42", json={"name": "Bob"}, status=200)
+
+    mock_resp.add("GET", "https://api.example.com/user/42", json={"name": "Bob"}, status=200)
 
     resp = requests.get("https://api.example.com/user/42")
     assert resp.json()["name"] == "Bob"
