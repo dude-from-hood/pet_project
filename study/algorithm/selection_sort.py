@@ -23,7 +23,7 @@ def selection_sort(arr):
                 smallest_elem = source[j]
                 smallest_idx = j
 
-        # 3. ТОЛЬКО ТЕПЕРЬ (после поиска) переносим элемент
+        # 3. ТОЛЬКО ТЕПЕРЬ (после поиска) добавляем минимальный элемент в отсортированный список
         sort_arr.append(source.pop(smallest_idx))
 
     return sort_arr
