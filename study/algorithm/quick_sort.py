@@ -18,9 +18,11 @@ def QuickSort(A: list):
         return QuickSort(L) + M + QuickSort(R)
 
 
-some_list = [random.randint(1, 9) for _ in range(10)]
+if __name__ == '__main__':
 
-print(some_list)
-print("*** магия сортировки ***")
-print(QuickSort(some_list))
+    some_list = [random.randint(1, 9) for _ in range(10)]
+
+    print(some_list)
+    print("*** магия сортировки ***")
+    print(QuickSort(some_list))
 
