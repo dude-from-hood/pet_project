@@ -20,7 +20,7 @@ def person_is_seller(person):
     return person[-1] == 'm'
 
 
-# Функция поиска (ваш код)
+# Функция поиска
 def search(name):
     search_queue = deque()
     search_queue += graph[name]
