@@ -2,6 +2,10 @@ from collections import deque
 
 
 def bfs_shortest_path(city_map, start, goal):
+    """
+    невзвешенный граф, в котором мы ищем кратчайший путь между вершинами.
+    """
+
     queue = deque([[start]])
     visited = set()
 
